@@ -1,9 +1,17 @@
-import React from 'react';
 
 import { download } from '../../assets';
 import { downloadImage } from '../../utils/helpers';
+import PropTypes from 'prop-types';
+
+Card.propTypes = {
+  _id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  prompt: PropTypes.string.isRequired,
+  photo: PropTypes.string.isRequired,
+};
 
 const Card = ({ _id, name, prompt, photo }) => (
+
   <div className="rounded-xl group relative shadow-card hover:shadow-cardhover card">
     <img
       className="w-full h-auto object-cover rounded-xl"

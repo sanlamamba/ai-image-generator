@@ -1,7 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Card, FormField, Loader } from '../components';
 import axios from 'axios';
+import PropTypes from 'prop-types';
+RenderCards.propTypes = {
+  data: PropTypes.array,
+  title: PropTypes.string,
+};
 
 const RenderCards = ({ data, title }) => {
   if (data?.length > 0) {
@@ -14,6 +19,7 @@ const RenderCards = ({ data, title }) => {
     <h2 className="mt-5 font-bold text-[#6469ff] text-xl uppercase">{title}</h2>
   );
 };
+
 
 const Home = () => {
   const [loading, setLoading] = useState(false);
