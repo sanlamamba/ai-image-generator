@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { Card, FormField, Loader } from '../components';
 import axios from 'axios';
+import appAxios from '../utils/axios/appAxios';
 
 const RenderCards = ({ data, title }) => {
   if (data?.length > 0) {
@@ -28,7 +29,7 @@ const Home = () => {
     setLoading(true);
 
     try {
-      const response = await axios.get('http://localhost:8080/api/v1/posts');
+      const response = await appAxios.get('/posts');
 
       if (response.status === 200) {
         const result = response.data;
