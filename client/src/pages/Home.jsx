@@ -2,11 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { Card, FormField, Loader } from '../components';
 import axios from 'axios';
-import PropTypes from 'prop-types';
-RenderCards.propTypes = {
-  data: PropTypes.array,
-  title: PropTypes.string,
-};
+import appAxios from '../utils/axios/appAxios';
 
 const RenderCards = ({ data, title }) => {
   if (data?.length > 0) {
@@ -15,7 +11,7 @@ const RenderCards = ({ data, title }) => {
     );
   }
 
-  return (
+return (
     <h2 className="mt-5 font-bold text-[#6469ff] text-xl uppercase">{title}</h2>
   );
 };
@@ -33,7 +29,7 @@ const Home = () => {
     setLoading(true);
 
     try {
-      const response = await axios.get('http://localhost:8080/api/v1/posts');
+      const response = await appAxios.get('/posts');
 
       if (response.status === 200) {
         const result = response.data;

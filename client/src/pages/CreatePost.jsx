@@ -4,6 +4,7 @@ import { preview } from "../assets";
 import { getRandomPrompt } from "../utils/helpers";
 import { FormField, Loader } from "../components";
 import axios from "axios";
+import appAxios from "../utils/axios/appAxios";
 
 function CreatePost() {
   const navigate = useNavigate();
@@ -22,14 +23,10 @@ function CreatePost() {
     }
     try {
       setGeneratingImage(true);
-      const response = await axios.post("http://localhost:8080/api/v1/dalle", {
+      const response = await appAxios.post("/dalle", {
         prompt: form.prompt,
-      }, {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json',
-        },
       });
+
       const data = response.data;
       setForm((prev) => ({
         ...prev,
@@ -51,11 +48,10 @@ function CreatePost() {
     }
     try {
       setLoading(true);
-      await axios.post("http://localhost:8080/api/v1/posts", form, {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json',
-        },
+      await appAxios.post("/posts", {
+        name: form.name,
+        prompt: form.prompt,
+        photo: form.photo,
       });
       navigate("/");
     } catch (err) {

@@ -1,14 +1,6 @@
 
 import { download } from '../../assets';
 import { downloadImage } from '../../utils/helpers';
-import PropTypes from 'prop-types';
-
-Card.propTypes = {
-  _id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  prompt: PropTypes.string.isRequired,
-  photo: PropTypes.string.isRequired,
-};
 
 const Card = ({ _id, name, prompt, photo }) => (
 
