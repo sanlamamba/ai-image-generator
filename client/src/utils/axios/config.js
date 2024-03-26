@@ -1,7 +1,7 @@
 const baseUrlProduction = "https://api.example.com";
 const baseUrlDevelopment = "http://localhost:8080";
 const baseUrlTesting = "http://localhost:8080";
-const environment = "production";
+const environment = "development";
 const apiVersion = "v1";
 const apiSuffix = "api";
 

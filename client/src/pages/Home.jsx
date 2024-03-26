@@ -30,6 +30,7 @@ const Home = () => {
 
     try {
       const response = await appAxios.get('/posts');
+      console.log(response);
 
       if (response.status === 200) {
         const result = response.data;

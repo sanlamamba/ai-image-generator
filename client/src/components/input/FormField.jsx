@@ -8,6 +8,7 @@ const FormField = ({
   handleChange,
   isSurpriseMe,
   handleSurpriseMe,
+  disabled
 }) => (
   <div>
     <div className="flex items-center gap-2 mb-2">
@@ -36,6 +37,7 @@ const FormField = ({
       value={value}
       onChange={handleChange}
       required
+      disabled={disabled}
     />
   </div>
 );
