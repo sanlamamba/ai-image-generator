@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import OTPInput from "./OTPInput";
 import { useAuth } from "../../utils/contexts/auth/auth";
+import { useContext } from "react";
+import { ThemeContext } from "../../utils/contexts/theme/theme";
 
 function VerifyForm({ email }) {
   const [otp, setOtp] = useState(new Array(5).fill(""));
@@ -42,31 +44,33 @@ function VerifyForm({ email }) {
   const OTPtimeout = () => {
     if (showResend) {
       return (
-        <p className="mt-4 text-[#666e75] text-[14px] max-w-[500px] text-center">
+        <p className={`mt-4 ${getTheme('text')} text-[14px] max-w-[500px] text-center`}>
           Didn't receive the code?{" "}
-          <button className="text-blue-500" onClick={requestOTP}>
+          <button className={`${getTheme('link')}`} onClick={requestOTP}>
             Resend
           </button>
         </p>
       );
     } else {
       return (
-        <p className="mt-4 text-[#666e75] text-[14px] max-w-[500px] text-center">
-          You can request a new code in { " "}
+        <p className={`mt-4 ${getTheme('text')} text-[14px] max-w-[500px] text-center`}>
+          You can request a new code in{" "}
           <span className="font-semibold">
-           {countdown + 1} seconds.
+            {countdown + 1} seconds.
           </span>
         </p>
       );
     }
   };
 
+  const {getTheme} = useContext(ThemeContext);
+
   return (
     <>
-      <h1 className="text-2xl font-semibold mb-4 text-center mt-2">
+      <h1 className={`text-2xl font-semibold mb-4 text-center mt-2 ${getTheme('text')}`}>
         Verify your account
       </h1>
-      <p className="mt-2 mb-4 text-[#666e75] text-[14px] max-w-[500px] text-center">
+      <p className={`mt-2 mb-4 ${getTheme('text')} text-[14px] max-w-[500px] text-center`}>
         We have sent a verification code to your email: <strong>{email}</strong>
         . Please enter the code below to verify your account.
       </p>
@@ -80,7 +84,7 @@ function VerifyForm({ email }) {
       />
 
       {OTPtimeout()}
-      <button className="bg-blue-500 text-white py-2 px-4 rounded mt-4 w-full"
+      <button className={`${getTheme('button-primary')} py-2 px-4 rounded mt-4 w-full`}
         onClick={() => onComplete()}
       >
         Submit Code

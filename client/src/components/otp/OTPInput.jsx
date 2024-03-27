@@ -1,4 +1,6 @@
 import React, { useEffect, useRef } from 'react';
+import { useContext } from 'react';
+import { ThemeContext } from '../../utils/contexts/theme/theme';
 
 const OTPInput = ({ length, onComplete, otp, setOtp, error, setError }) => {
   const inputsRef = useRef(new Array(length));
@@ -40,26 +42,27 @@ const OTPInput = ({ length, onComplete, otp, setOtp, error, setError }) => {
       setError('Invalid OTP');
     }
   };
+  const {getTheme} = useContext(ThemeContext);
 
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="flex justify-center items-center">
-      {otp.map((data, index) => (
-        <input
-          className="m-2 border p-2 text-center w-12"
-          type="text"
-          name={`otp-${index}`}
-          key={index}
-          value={data}
-          maxLength="1"
-          onChange={e => handleChange(e.target, index)}
-          onPaste={handlePaste}
-          onFocus={e => e.target.select()}
-          ref={ref => inputsRef.current[index] = ref}
-        />
-      ))}
+        {otp.map((data, index) => (
+          <input
+            className={`m-2 border p-2 text-center w-12 ${getTheme('bg')} ${getTheme('text')} ${getTheme('border')}`}
+            type="text"
+            name={`otp-${index}`}
+            key={index}
+            value={data}
+            maxLength="1"
+            onChange={e => handleChange(e.target, index)}
+            onPaste={handlePaste}
+            onFocus={e => e.target.select()}
+            ref={ref => inputsRef.current[index] = ref}
+          />
+        ))}
       </div>
-      {error && <p className="text-red-500 text-sm mt-2 block">{error}</p>}
+      {error && <p className={`text-red-500 text-sm mt-2 block ${getTheme('text')}`}>{error}</p>}
     </div>
   );
 };

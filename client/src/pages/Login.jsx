@@ -8,6 +8,8 @@ import SocialSeparator from "../components/separator/SocialSeparator";
 import { toast } from "react-toastify";
 import VerifyForm from "../components/otp/VerifyForm";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { ThemeContext } from "../utils/contexts/theme/theme";
 function Login() {
   const { user, login } = useAuth();
   const navigate = useNavigate();
@@ -29,25 +31,37 @@ function Login() {
     setVerification(true);
     console.log("LOGIN REQUESTED ", email);
   };
- 
 
   useEffect(() => {
     if (user) {
-      navigate("/")
+      navigate("/");
     }
-  }
-  , [user]);
+  }, [user]);
+
+  const { getTheme } = useContext(ThemeContext);
 
   return (
-    <div className="max-w-sm bg-white mx-auto py-10 px-8 rounded border shadow-sm">
+    <div
+      className={`max-w-sm mx-auto py-10 px-8 rounded border shadow-sm ${getTheme(
+        "bg"
+      )} ${getTheme("border")}`}
+    >
       {verification ? (
         <VerifyForm email={email} />
       ) : (
         <>
-          <h1 className="text-2xl font-semibold mb-4 text-center mt-2">
+          <h1
+            className={`text-2xl font-semibold mb-4 text-center mt-2 ${getTheme(
+              "text"
+            )}`}
+          >
             Login
           </h1>
-          <p className="mt-2 text-[#666e75] text-[14px] max-w-[500px] text-center">
+          <p
+            className={`mt-2 ${getTheme(
+              "text"
+            )} text-[14px] max-w-[500px] text-center`}
+          >
             Enter your email to receive a magic link to login.
           </p>
           <div className="flex flex-col space-y-2">
@@ -60,15 +74,21 @@ function Login() {
             />
           </div>
           <button
-            className="bg-blue-500 text-white py-2 px-4 rounded mt-4 w-full"
+            className={`py-2 px-4 rounded mt-4 w-full ${getTheme(
+              "button-primary"
+            )}`}
             type="button"
             onClick={handleLoginRequest}
           >
             Send Magic Link
           </button>
-          <p className="text-[#666e75] text-[14px] max-w-[500px] text-center mt-4">
-            You don&apos;t have an account?{" "}
-            <Link to="/register" className="text-blue-500">
+          <p
+            className={`text-[14px] max-w-[500px] text-center mt-4 ${getTheme(
+              "text"
+            )}`}
+          >
+            You don't have an account?{" "}
+            <Link to="/register" className={getTheme("link")}>
               Sign up
             </Link>
           </p>
