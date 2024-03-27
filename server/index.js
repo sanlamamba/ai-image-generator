@@ -14,7 +14,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: (process.env.ENVIROMENT === "development") ? process.env.ORIGIN_LOCAL: process.env.ORIGIN_PROD,
+    origin: ["http://localhost:8080", "http://localhost:8081", "http://localhost:80", "http://localhost"],
   })
 );
 app.use(
@@ -22,6 +22,21 @@ app.use(
     limit: "50mb",
   })
 );
+
+app.get("/api/v1", (req, res) => {
+  const uptime = process.uptime();
+  const uptimeString = new Date(uptime * 1000).toISOString().substr(11, 8);
+  const version = process.env.VERSION;
+  const message = {
+    message: "Welcome to Dalle API",
+    "origin-allowed": "http://localhost:8080, http://localhost:8081, http://localhost:80",
+    health: "healthy",
+    "running-for": uptimeString,
+  };
+  res.json(message);
+
+
+})
 
 app.use((req, res, next) => {
   console.log(`Incoming request: ${req.method} ${req.url}`);
