@@ -17,13 +17,22 @@ function CreatePost() {
       "Generate an imaginative image through DALL-E AI and share it with the community",
     type: null,
   });
+  const [pageLoading,setPageLoading] = React.useState(true)
 
   const { user } = useAuth();
 
   useEffect(() => {
+    
+  }, [user]);
+
+  const [form, setForm] = React.useState({
+    name: "",
+    prompt: "",
+    photo: "",
+  });
+  useEffect(() => {
     const canUserCreatePost = () => {
       if (!user) {
-        toast.info("Please login to create a post");
         setShowAuthButtons({
           title: "Please login to create a post",
           message:
@@ -41,22 +50,28 @@ function CreatePost() {
         });
       }
     };
-    canUserCreatePost();
+    try{
+      if (!user) return canUserCreatePost()
+      const name = user.name[0].toUpperCase() + user.name.slice(1);
+      setForm((prev) => ({
+        ...prev,
+        name: name,
+      }));
+      setShowAuthButtons({
+        title: "Create",
+        message:
+          "Generate an imaginative image through DALL-E AI and share it with the community",
+        type: null,
+      })
+      
+    }catch(e){
+      toast.error(e)
+    }finally{
+      setPageLoading(false)
+    }
+   
   }, [user]);
 
-  const [form, setForm] = React.useState({
-    name: "",
-    prompt: "",
-    photo: "",
-  });
-  useEffect(() => {
-    if (!user) return;
-    const name = user.name[0].toUpperCase() + user.name.slice(1);
-    setForm((prev) => ({
-      ...prev,
-      name: name,
-    }));
-  }, [user]);
 
   const [generatingImage, setGeneratingImage] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
@@ -123,6 +138,15 @@ function CreatePost() {
   };
 
   const {getTheme} = useContext(ThemeContext);
+
+  if(pageLoading){
+    return (
+      <div className="flex justify-center items-center">
+        <Loader />
+      </div>
+    )
+  }
+
   const AuthenticateButtons = () => {
     const buttonClass = `text-white ${getTheme('button-primary')} font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center`;
     // Using getTheme('button-primary') as an example, adjust based on your theme context
@@ -164,9 +188,74 @@ function CreatePost() {
       {showAuthButtons.type ? (
         <AuthenticateButtons />
       ) : (
-        // Assuming the form and its related components like FormField are theme-aware
         <form className="mt-16 max-w-3xl" onSubmit={handleSubmit}>
-          {/* Form content, assuming it respects the theme */}
+          <div className="flex flex-col gap-5">
+          <FormField
+            labelName="Your Name"
+            type="text"
+            name="name"
+            placeholder="Ex., john doe"
+            value={form.name}
+            handleChange={handleChange}
+            disabled
+          />
+
+          <FormField
+            labelName="Prompt"
+            type="text"
+            name="prompt"
+            placeholder="An Impressionist oil painting of sunflowers in a purple vase…"
+            value={form.prompt}
+            handleChange={handleChange}
+            isSurpriseMe
+            handleSurpriseMe={handleSurpriseMe}
+          />
+
+          <div className="relative bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-64 p-3 h-64 flex justify-center items-center">
+            {form.photo ? (
+              <img
+                src={form.photo}
+                alt={form.prompt}
+                className="w-full h-full object-contain"
+              />
+            ) : (
+              <img
+                src={preview}
+                alt="preview"
+                className="w-9/12 h-9/12 object-contain opacity-40"
+              />
+            )}
+
+            {generatingImage && (
+              <div className="absolute inset-0 z-0 flex justify-center items-center bg-[rgba(0,0,0,0.5)] rounded-lg">
+                <Loader />
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="mt-5 flex gap-5">
+          <button
+            type="button"
+            onClick={generateImage}
+            className=" text-white bg-green-700 font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+          >
+            {generatingImage ? "Generating..." : "Generate"}
+          </button>
+        </div>
+
+        <div className="mt-10">
+          <p className="mt-2 text-[#666e75] text-[14px]">
+            ** Once you have created the image you want, you can share it with
+            others in the community **
+          </p>
+          <button
+            type="submit"
+            className="mt-3 text-white bg-[#6469ff] font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+          >
+            {loading ? "Sharing..." : "Share with the Community"}
+          </button>
+        </div>
         </form>
       )}
     </section>

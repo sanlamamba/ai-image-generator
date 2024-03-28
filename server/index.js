@@ -14,7 +14,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["http://localhost:8080", "http://localhost:8081", "http://localhost:80", "http://localhost", "https://gleaming-sprinkles-c46725.netlify.app"],
+    origin: ["http://localhost:5173", "http://localhost:5174", "http://localhost:80", "http://localhost", "https://gleaming-sprinkles-c46725.netlify.app"],
   })
 );
 app.use(
@@ -29,7 +29,7 @@ app.get("/api/v1", (req, res) => {
   const version = process.env.VERSION;
   const message = {
     message: "Welcome to Dalle API",
-    "origin-allowed":[ "http://localhost:8080, http://localhost:8081, http://localhost:80", "https://gleaming-sprinkles-c46725.netlify.app"],
+    "origin-allowed":[ "http://localhost:5173"," http://localhost:5174", "http://localhost:80", "https://gleaming-sprinkles-c46725.netlify.app"],
     health: "healthy",
     "running-for": uptimeString,
   };
