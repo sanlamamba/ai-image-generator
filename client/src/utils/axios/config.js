@@ -1,7 +1,8 @@
-const baseUrlProduction = "https://api.example.com";
+const baseUrlProduction = "https://ai-image-generator-lt0y.onrender.com";
 const baseUrlDevelopment = "http://localhost:9080";
 const baseUrlTesting = "http://localhost:9080";
-const environment = "development";
+// const environment = "development";
+const environment = "production";
 const apiVersion = "v1";
 const apiSuffix = "api";
 
