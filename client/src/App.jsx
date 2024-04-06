@@ -1,13 +1,15 @@
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { Home, CreatePost, Login } from "./pages";
 
-import { logo } from "./assets";
+import { logo_dark, logo_light } from "./assets";
 import Register from "./pages/Register";
 import NavAvatar from "./components/NavItems/NavAvatar";
 import OTPPage from "./pages/OTPPage";
 import { useContext } from "react";
 import { ThemeContext } from "./utils/contexts/theme/theme";
 import ThemeToggle from "./components/NavItems/ThemeToggle";
+import Logo from "./components/NavItems/Logo";
+import CreatePostButon from "./components/NavItems/CreatePostButon";
 
 export default function App() {
   const {theme, toggleTheme, getTheme} = useContext(ThemeContext);
@@ -15,21 +17,15 @@ export default function App() {
   return (
     <BrowserRouter>
       <header className={`w-full flex justify-between items-center sm:px-8 px-4 py-4 border-b ${getTheme('bg')} ${getTheme('border')}`}>
-        <Link to="/">
-          <img src={logo} alt="Logo" className="w-28 object-contain" />
-        </Link>
+        <Logo />
         <nav className="flex gap-5 sm:flex-row flex-col">
           <NavAvatar />
-          <Link
-            to="/create-post"
-            className={`font-inter font-medium ${getTheme('button-primary')} px-4 py-2 rounded-md`}
-          >
-            Create Post
-          </Link>
           <ThemeToggle/>
         </nav>
       </header>
       <main className={`sm:p-8 px-4 py-8 w-full ${getTheme('bg-secondary')} min-h-[calc(100vh-73px)]`}>
+      <CreatePostButon/>
+
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/create-post" element={<CreatePost />} />

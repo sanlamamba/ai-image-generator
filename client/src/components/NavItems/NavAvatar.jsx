@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { ThemeContext } from "../../utils/contexts/theme/theme";
 
 function NavAvatar() {
-  const { user, logout } = useAuth(); // Assuming you have a logout method in your auth context
+  const { user, logout } = useAuth();
   const {getTheme } = useContext(ThemeContext);
 
   return (
