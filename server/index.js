@@ -14,7 +14,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:5174", "http://localhost:80", "http://localhost", "https://gleaming-sprinkles-c46725.netlify.app"],
+    origin: ["http://localhost:5173", "http://localhost:5174", "http://localhost:80", "http://localhost", "https://one-pixel.netlify.app/"],
   })
 );
 app.use(
