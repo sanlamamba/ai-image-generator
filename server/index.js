@@ -12,9 +12,11 @@ dotenv.config();
 
 const app = express();
 
+const origins = ["http://localhost:5173", "https://scaling-space-trout-gr9jvgp95qgf96xp-5173.app.github.dev"];
+
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:5174", "http://localhost:80", "http://localhost", "https://one-pixel.netlify.app/"],
+    origin: origins,
   })
 );
 app.use(
@@ -26,10 +28,9 @@ app.use(
 app.get("/api/v1", (req, res) => {
   const uptime = process.uptime();
   const uptimeString = new Date(uptime * 1000).toISOString().substr(11, 8);
-  const version = process.env.VERSION;
   const message = {
     message: "Welcome to Dalle API",
-    "origin-allowed":[ "http://localhost:5173"," http://localhost:5174", "http://localhost:80", "https://gleaming-sprinkles-c46725.netlify.app"],
+    "origin-allowed": origins,
     health: "healthy",
     "running-for": uptimeString,
   };
