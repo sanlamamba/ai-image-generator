@@ -1,10 +1,10 @@
 # DALL·E MERN Image Generator
 
-![GitHub stars](https://img.shields.io/github/stars/yourusername/dalle-mern-image-generator?style=social)
-![Forks](https://img.shields.io/github/forks/yourusername/dalle-mern-image-generator?style=social)
-![Issues](https://img.shields.io/github/issues/yourusername/dalle-mern-image-generator)
-![Pull Requests](https://img.shields.io/github/issues-pr/yourusername/dalle-mern-image-generator)
-![License](https://img.shields.io/github/license/yourusername/dalle-mern-image-generator)
+![GitHub stars](https://img.shields.io/github/stars/sanlamamba/dalle-mern-image-generator?style=social)
+![Forks](https://img.shields.io/github/forks/sanlamamba/dalle-mern-image-generator?style=social)
+![Issues](https://img.shields.io/github/issues/sanlamamba/dalle-mern-image-generator)
+![Pull Requests](https://img.shields.io/github/issues-pr/sanlamamba/dalle-mern-image-generator)
+![License](https://img.shields.io/github/license/sanlamamba/dalle-mern-image-generator)
 
 Welcome to the DALL·E MERN Image Generator - a full-stack application designed to unleash the power of AI-driven creativity directly from your browser. Built on the robust MERN stack (MongoDB, Express.js, React, and Node.js), this platform integrates seamlessly with OpenAI's DALL·E API to offer an intuitive and dynamic user experience for generating and interacting with AI-created images.
 
@@ -27,7 +27,7 @@ Welcome to the DALL·E MERN Image Generator - a full-stack application designed 
 Clone this repository and follow the setup instructions in our documentation to get started with the DALL·E MERN Image Generator. 
 
 ```bash
-  git clone https://github.com/yourusername/dalle-mern-image-generator.git
+  git clone https://github.com/sanlamamba/dalle-mern-image-generator.git
 ```    
 ## Contribute
 
