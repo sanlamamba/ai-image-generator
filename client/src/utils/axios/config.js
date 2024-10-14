@@ -1,8 +1,8 @@
-const baseUrlProduction = "https://ai-image-generator-lt0y.onrender.com";
+const baseUrlProduction = "https://scaling-space-trout-gr9jvgp95qgf96xp-9080.app.github.dev";
 const baseUrlDevelopment = "http://localhost:9080";
 const baseUrlTesting = "http://localhost:9080";
-// const environment = "development";
-const environment = "production";
+const environment = "development";
+// const environment = "production";
 const apiVersion = "v1";
 const apiSuffix = "api";
 

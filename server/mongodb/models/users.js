@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 import { magicTokenGenerator } from "../../utils/helpers/index.js";
-import { sendEmail } from "../../utils/nodemailer/configuration.js";
 import registerMagicLinkTemplate from "../../utils/nodemailer/templates/registerMagicLink.js";
 import loginMagicLinkTemplate from "../../utils/nodemailer/templates/loginMagicLink.js";
+import emailService from "../../utils/nodemailer/configuration.js";
 
 const socialAuthProviderSchema = new mongoose.Schema(
   {
@@ -140,7 +140,7 @@ userSchema.pre("save", function (next) {
       process.env.ENVIROMENT === "development"
         ? process.env.ORIGIN_LOCAL
         : process.env.ORIGIN_PROD;
-    sendEmail({
+    emailService.sendEmail({
       to: this.email,
       subject: "Welcome to our platform!",
       text: `Hello, ${this.name}! Please click the following link to verify your email address and activate your account: ${process.env.CLIENT_URL}/verify-email/${this.magicLinkToken}`,
@@ -206,7 +206,7 @@ userSchema.methods.startLogginIn = function () {
     process.env.ENVIROMENT === "development"
       ? process.env.ORIGIN_LOCAL
       : process.env.ORIGIN_PROD;
-  sendEmail({
+  emailService.sendEmail({
     to: this.email,
     subject: "Welcome to our platform!",
     text: `Hello, ${this.name}! Please click the following link to verify your email address and activate your account: ${process.env.CLIENT_URL}/verify-email/${this.magicLinkToken}`,
